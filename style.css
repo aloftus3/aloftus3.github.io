@@ -39,11 +39,7 @@ html, body {
     font-size: 3rem;
     text-align: center;
   }
-  
-  h3 {
-    font-size: 2.2rem;
-  }
-  
+
   p, li {
     font-size: 1.6rem;
     line-height: 1.5;
@@ -58,47 +54,48 @@ html, body {
     flex-flow: row wrap;
   }
   
-
-
   body > * {
     background-color:yellow;
     padding: 1%;
   }
-  .wrapper{
-  }
-  
+
   .container{
-    display: flex;   
-    flex-flow: row wrap;
+    display: flex;
     margin: 0 auto;
     max-width:960px;
   }
   .one{
     display:flex;
-    flex-flow:column wrap;
-    flex: 1 1 auto;
-    padding:1%
+    flex-direction:column;
+    padding:1%;
+    flex: 33.33%;
+    align-items: center;
   }
   .one img{
-    margin-left: 10px;
+    margin: 25px;
     display: block;
     height: 175px;
     width: 175px;
-    padding: 1%;
+    border: 1px solid #d81111;
+    border-radius: 4px;
     
   }
   .two {
     background-color: white;
     padding: 1%;
-    flex: 2 1 auto;
+    flex: 66.67%;
   }
   
   .caption{
+    margin: 0px;
     background-color: white;
     padding: 1%;
   }
 
   @media screen and (max-width:1000px){
+    .container{
+        flex-direction:column;
+    }
     .one{
         flex-direction:row;
     }
