@@ -93,6 +93,7 @@ html, body {
     padding:1%;
     flex: 33.33%;
     align-items: center;
+    column-width: 300px;
   }
   .one img{
     margin: 25px;
@@ -100,7 +101,7 @@ html, body {
     width: 250px;
     border: 1px solid #195DB3;
     border-radius: 4px;
-    max-width: inherit;
+    width: inherit;
     
   }
   .two {
