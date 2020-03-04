@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Andy's Lab 4</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body>
+    
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">Andy's Lab 4</div>
+        <button class="button" onclick="clickMe()">
+          Click me to make a change
+        </button>
+        <div class="content">
+          <p>
+            Retro fam narwhal hoodie meggings viral bushwick yr chartreuse.
+            Chartreuse seitan banh mi selfies, woke ennui venmo craft beer. Air
+            plant tumeric retro DIY iPhone poutine. +1 gastropub chillwave,
+            cronut glossier pork belly tacos poke next level fanny pack vegan
+            jianbing lo-fi.
+          </p>
+
+        </div>
+        <div class="footer"></div>
+      </div>
+    </div>
+    <script>
+
+      let name = 'Andy Loftus';
+      let length = name.length;
+      let third_char = name[2].toUpperCase();
+      let final_three = name.slice(name.length-3);
+      let name_list = name.split(' ');
+      let first = name_list[0];
+      let last = name_list[1]
+      let full_length = first.length + last.length
+      //append character length to the header
+      const h_content = document.querySelector(".header");
+      h_content.innerHTML += " ("+full_length+" chars)"
+
+      function clickMe() {
+        const content = document.querySelector(".content");
+        content.innerHTML = "<p>My name has "+length+" characters.</p>"+"<p>The third character in my name is "+ third_char +".<br/>Last three characters of last name: "+final_three+"</p>";
+        
+      }
+    </script>
+  </body>
+</html>
