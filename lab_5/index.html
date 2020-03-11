@@ -10,7 +10,7 @@
   <div class="container">
     <div class="wrapper">
       <div class="header">Andy's List of Countries</div>
-      <button class="activate">Click me to replace list
+      <button class="activate" onclick="clickMe()">Click me to replace list
         entries</button>
       <div class="content">
         <ol class = "countries">
@@ -268,11 +268,54 @@
     ]
     console.log("List of countries in the world", countries);
     
+
+    //CONSTRUCT INITIAL LIST
+    //inject the initial list of all countries before button click
+    var countries_str = Array()
     countries.forEach(myFunction);
-    function myFunction(country,index){
+    function myFunction(country){
+      var name_code = country['name']+', '+country['code'];
       const content = document.querySelector(".countries");
-      content.innerHTML += '<li>'+country['name']+'</li>';
+      content.innerHTML += '<li>'+name_code+'</li>';
+      //add to a new array that contains strings instead of objects
+      countries_str.push(name_code)
     };
+
+    //BUILDING RANDOM SAMPLE
+    //initialize new array to contain sample randoms
+    var random_sample = new Array();
+    //for 25 iterations..
+    for (i = 0; i < 25; i++) {
+      //get a random country 
+      var random = countries_str[Math.floor(Math.random() * countries_str.length)];
+      //if random country is already in 'random array'
+      if (random_sample.includes(random)){
+        //get a new random country until it is not already in the array
+        while(random_sample.includes(random) == true){
+          random = countries_str[Math.floor(Math.random() * countries_str.length)];
+        };
+        //append the unique country
+        random_sample.push(random);
+      } else {
+        //append country if it is not in the array
+        random_sample.push(random);
+      }; 
+    };
+    
+    //Change country content on button click
+    function clickMe() {
+      random_sample.forEach(myFunction2);
+      function myFunction2(country1){
+        const new_content = document.querySelector(".countries");
+        //if it is the first country in the list
+        if(country1 == random_sample[0]){
+          new_content.innerHTML = '<li>'+country1+'</li>';
+        } else {
+          new_content.innerHTML += '<li>'+country1+'</li>';
+        }
+      };
+    };
+      
   </script>
 </body>
 
