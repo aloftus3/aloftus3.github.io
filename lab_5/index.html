@@ -274,7 +274,7 @@
     var countries_str = Array()
     countries.forEach(myFunction);
     function myFunction(country){
-      var name_code = country['name']+', '+country['code'];
+      var name_code = '<b>'+country['code']+'</b> '+country['name'];
       const content = document.querySelector(".countries");
       content.innerHTML += '<li>'+name_code+'</li>';
       //add to a new array that contains strings instead of objects
@@ -301,6 +301,20 @@
         random_sample.push(random);
       }; 
     };
+    
+
+    //Log unselected countries to your console
+    var unselected_cont = new Array();
+    countries_str.forEach(log_function);
+    function myFunction2(country_log){
+      if(random_sample.includes(country_log)){
+        continue;
+      } else {
+        unselected_cont.push(country_log)
+      }
+    }
+    console.log("List of countries unselected", country_log);
+    
     
     //Change country content on button click
     function clickMe() {
