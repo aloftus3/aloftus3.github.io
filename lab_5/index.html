@@ -10,7 +10,7 @@
   <div class="container">
     <div class="wrapper">
       <div class="header">Andy's List of Countries</div>
-      <button class="activate" onclick="clickMe()">Click me to replace list
+      <button class="activate">Click me to replace list
       with a random sample.</button>
       <div class="content">
         <ol class = "countries">
@@ -268,6 +268,7 @@
     ]
     console.log("List of countries in the world", countries);
     
+    
 
     //CONSTRUCT INITIAL LIST
     //inject the initial list of all countries before button click
@@ -280,12 +281,18 @@
       //add to a new array that contains strings instead of objects
       countries_str.push(name_code)
     };    
-    
+
     //initiate an array to store all random samples 
     const random_sample_stored = new Array();
 
+    //call event listener button class
+    var btn = document.querySelector(".activate");
+    
+    btn.addEventListener("click",clickMe)
+
     //Change country content on button click
     function clickMe() {
+      
       //Bonus: Guarantee a given country cannot appear twice in any given click of the button
       countries_str.forEach(store_function);
       function store_function(country3){
@@ -296,6 +303,11 @@
             countries_str.splice(index1, 1);
           } 
         }
+      }
+      if (countries_str.length < 25){
+        const done = document.querySelector(".countries");
+        done.innerHTML = 'Not enough countries left.';
+        return;
       }
 
       //BUILDING RANDOM SAMPLE
@@ -350,7 +362,9 @@
       }
       
       console.log("List of countries unselected", unselected_cont);
-    }; 
+      
+    };
+
   </script>
 </body>
 
