@@ -2,17 +2,19 @@
 <html lang="en">
 
 <head>
-  <title>Test JSON page</title>
+  <title>Andy's List of Countries</title>
   <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 
 <body>
   <div class="container">
     <div class="wrapper">
-      <div class="header">Test JSON page</div>
+      <div class="header">Andy's List of Countries</div>
       <button class="activate">Click me to replace list
         entries</button>
       <div class="content">
+        <ol class = "countries">
+        </ol>
       </div>
       <div class="footer"></div>
     </div>
@@ -265,6 +267,12 @@
       { "name": "Zimbabwe", "code": "ZW" }
     ]
     console.log("List of countries in the world", countries);
+    
+    countries.forEach(myFunction);
+    function myFunction(country,index){
+      const content = document.querySelector(".countries");
+      content.innerHTML += '<li>'+country['name']+'</li>';
+    };
   </script>
 </body>
 
