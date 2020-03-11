@@ -11,7 +11,7 @@
     <div class="wrapper">
       <div class="header">Andy's List of Countries</div>
       <button class="activate" onclick="clickMe()">Click me to replace list
-        entries</button>
+      with a random sample.</button>
       <div class="content">
         <ol class = "countries">
         </ol>
@@ -271,7 +271,7 @@
 
     //CONSTRUCT INITIAL LIST
     //inject the initial list of all countries before button click
-    var countries_str = Array()
+    const countries_str = Array()
     countries.forEach(myFunction);
     function myFunction(country){
       var name_code = '<b>'+country['code']+'</b> '+country['name'];
@@ -281,8 +281,22 @@
       countries_str.push(name_code)
     };    
     
+    //initiate an array to store all random samples 
+    const random_sample_stored = new Array();
+
     //Change country content on button click
     function clickMe() {
+      //Bonus: Guarantee a given country cannot appear twice in any given click of the button
+      countries_str.forEach(store_function);
+      function store_function(country3){
+        if(random_sample_stored.includes(country3)==true){
+          var item1 = country3
+          var index1 = countries_str.indexOf(item1);
+          if (index1 !== -1){
+            countries_str.splice(index1, 1);
+          } 
+        }
+      }
 
       //BUILDING RANDOM SAMPLE
       //initialize new array to contain sample randoms
@@ -299,11 +313,19 @@
           };
           //append the unique country
           random_sample.push(random);
+          //push random sample to collection of random samples
+          random_sample_stored.push(random);
         } else {
           //append country if it is not in the array
           random_sample.push(random);
+          //push random sample to collection of random samples
+          random_sample_stored.push(random);
         }; 
       };
+
+      
+      //sort the random sample alphabetically
+      random_sample.sort();
 
       //Insert into country class
       random_sample.forEach(myFunction2);
@@ -323,9 +345,10 @@
       function log_function(country_log){
         decode = '<b>'+country_log['code']+'</b> '+country_log['name'];
         if(random_sample.includes(decode)==false){
-          unselected_cont.push(country_log)
+          unselected_cont.push(country_log);
         }
       }
+      
       console.log("List of countries unselected", unselected_cont);
     }; 
   </script>
