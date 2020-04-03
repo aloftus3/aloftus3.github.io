@@ -17,12 +17,29 @@ html {
   justify-content: center;
   width: 100%;
 }
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .imagebox{
   margin: auto;
   background-color: rgb(255, 217, 146);
+  align-items: center;
   padding: 1%;
   border-radius: 4px;
-  width: 640px;
+  height:720px;
+  width: 960px;
+  display: flex;
+  flex-direction: column;
+}
+.imagebox2{
+  margin: auto;
+  
+  padding: 1%;
+  border-radius: 4px;
+  height:720px;
+  width: 960px;
   display: flex;
   flex-direction: column;
 }
@@ -40,10 +57,9 @@ h2{
 }
 
 .full-img {
-  position: relative;
   display: block;
-  width: 640px;
-  height: 480px;
+  justify-self: center;
+  height:720px;
 }
 
 .overlay {
@@ -71,4 +87,11 @@ button {
   width: 20%;
   float: left;
   cursor: pointer;
+}
+@media screen and (max-width:1000px){
+  .wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
