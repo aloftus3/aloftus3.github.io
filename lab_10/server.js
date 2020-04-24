@@ -43,8 +43,7 @@ function processDataForFrontEnd(req, res) {
 // Syntax change - we don't want to repeat ourselves,
 // or we'll end up with spelling errors in our endpoints.
 //
-app
-  .route("/api")
+app.route("/api")
   .get((req, res) => {
     // processDataForFrontEnd(req, res)
     (async () => {
@@ -71,7 +70,20 @@ app
     }
   })
   .put((req,res) => {
-    console.log('Put Result',reuslt)
+    console.log('Put Result',res)
+    if (!req.body.name) {
+      console.log(req.body);
+      res.status("418").json({"success":"Something is wrong..."});
+    } else {
+      writeUser(req.body.name, dbSettings)
+      .then((result) => {
+        console.log(result);
+        res.json({"success":"Nice! It Works..."}); // simple mode
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   });
 
 app.listen(port, () => {
