@@ -45,7 +45,7 @@ function processDataForFrontEnd(req, res) {
 //
 app.route("/api")
   .get((req, res) => {
-    // processDataForFrontEnd(req, res)
+    // use SQLite to return all records from your in-memory database
     (async () => {
       const db = await open(dbSettings);
       const result = await db.all("SELECT * FROM user");

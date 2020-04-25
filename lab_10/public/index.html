@@ -12,17 +12,27 @@
         </div>
         <div>
           <form class="targetForm" id="labForm">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" />
-            <label for="zip">Zip Code</label>
-            <input type="text" id="zip" name="zip" />
-            <label for="interests">Interests</label>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" /><br /> 
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" /><br /> 
+            <label for="interests">Interests:</label><br /> 
             <textarea id="interests" name="interests" rows="5" cols="33">Default text says what?</textarea
             ><br />
             <button id="formBtn">Submit</button>
           </form>  
-          <button id="formBtn1">See Data</button>
-          <div class ='List'>List will go here</div>
+          <button id="formBtnGet">See Data</button>
+          <div class ='ListContainer'>
+            <div class = 'NameCont'>
+              <ol class = "NameList"></ol>
+            </div>
+            <div class = 'ZipCont'>
+              <ol class = "ZipList"></ol>
+            </div>
+            <div class = 'IntCont'>
+              <ol class = "IntList"></ol>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -31,7 +41,7 @@
         e.preventDefault(); // this prevents your page reloading on button click
         const target = document.querySelector("#labForm");
         const btn = document.querySelector("#formBtn");
-
+        
         const formToSend = new FormData(target);
 
         //what we are sending to the back end
@@ -51,9 +61,47 @@
             target.append(`${jsonresponse.success}`);
           });
       }
-
+      
+      function getData(e) {
+        e.preventDefault(); // this prevents your page reloading on button click
+        
+        //Show Labels
+        const y = document.querySelector(".NameList");
+        y.innerHTML +='<b>Name</b>';
+        const x = document.querySelector(".ZipList");
+        x.innerHTML +='<b>Zip Code</b>';
+        const z = document.querySelector(".IntList");
+        z.innerHTML +='<b>Interests</b>';
+        
+        
+        //what we are getting from the back end
+        fetch("/api", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          //body: JSON.stringify(Object.fromEntries(formToSend)),
+        })
+          .then((data) => data.json()) 
+          .then((jsonData) => {
+            console.log(jsonData)
+            
+            jsonData.forEach((element) => {
+              console.log(element);
+              const targetList = document.querySelector(".NameList");
+              targetList.innerHTML +='<li>'+element.name+'</li>';
+              const targetList1 = document.querySelector(".ZipList");
+              targetList1.innerHTML +='<li>'+element.zip+'</li>';
+              const targetList2 = document.querySelector(".IntList");
+              targetList2.innerHTML +='<li>'+element.interests+'</li>';
+              
+          });
+        })
+      }
       const formBtn = document.querySelector("#formBtn");
       formBtn.addEventListener("click", sendForm);
+      const BtnGet = document.querySelector("#formBtnGet");
+      BtnGet.addEventListener("click", getData);
     </script>
   </body>
 </html>
