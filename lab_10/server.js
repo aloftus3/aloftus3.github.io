@@ -53,6 +53,7 @@ app.route("/api")
       res.json(result);
     })();
   })
+  /*
   .post((req, res) => {
     console.log("/api post request", req.body);
     if (!req.body.name) {
@@ -69,13 +70,15 @@ app.route("/api")
       });
     }
   })
+  */
   .put((req,res) => {
     console.log('Put Result',res)
-    if (!req.body.name) {
+    if (!req.body.name || !req.body.zip) {
       console.log(req.body);
-      res.status("418").json({"success":"Something is wrong..."});
+      res.status("418").json({"success":"Please enter both your name and zip."});
     } else {
-      writeUser(req.body.name, dbSettings)
+      let username = [req.body.name, req.body.zip,req.body.interests]
+      writeUser(username, dbSettings)
       .then((result) => {
         console.log(result);
         res.json({"success":"Nice! It Works..."}); // simple mode
