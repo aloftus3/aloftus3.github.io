@@ -27,10 +27,9 @@
 
       <main>
         <section>
-          <h2>Welcome to the Crime Database</h2>
-          <p>Here is a list of the 10 most recent crimes:</p>
-          <ol class="crimeData"></ol>
-
+          <h2>Crime Types</h2>
+          <p>Select one of the most common crimes to...</p>
+          <div class="crimeData"></div>
         </section>
       </main>
 
@@ -55,31 +54,25 @@
       
           })
           .then((data)=>{
-            const sectorB = [];
-            //foreach to reformat into array 
-            data.forEach(element => {
-              if(element.sector == 'B'){
-                sectorB.push(element);
-              };
-            });
-            console.log(sectorB);
-            return sectorB;
-          })
-          .then((data)=>{
-            const recent = []
-            for (let e of [0,1,2,3,4,5,6,7,8,9]){
-              //console.log(data[data.length-e]);
-              const len = data.length -1;
-              recent.push(data[len-e]);
+          return data.reduce((result, current)=>{
+            if(!result[current.inc_type]){
+              result[current.inc_type]=[];
             }
+            result[current.inc_type].push(current);
+            return result;
+          }, {});
+        })
+        .then((data)=>{
+          console.log(data);
+          const new_content = document.querySelector(".crimeData");
+          for (let type in data){
+            console.log(type);
+            let typeLink = '<li><a href="crimeType.html">'+type+'</a></li>';
+            new_content.innerHTML += typeLink;
             
-            const new_content = document.querySelector(".crimeData");
-            recent.forEach(el => {
-              console.log(el.date);
-              new_content.innerHTML += '<li>'+el.inc_type+" "+el.date.substring(0,10)+'</li>';
-            })
-            console.log(recent.length)
-          });
+          }
+
+        })
           
           
       </script>
