@@ -16,7 +16,7 @@
         
         <nav>
           <ul>
-            <li><span href="index.html">Home</span></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="crimes.html">CRIMES</a></li>
             <li><a href="types.html">CRIME TYPES</a></li>
             <li><a href="about.html">ABOUT</a></li>
@@ -28,8 +28,20 @@
       <main>
         <section>
           <h2>CRIMES</h2>
-          <p>Here is a list of the 10 most recent crimes:</p>
-          <ol class="crimeData"></ol>
+          <p>Here is a list of all crimes since 2017:</p>
+          <div class='searchable-header'>
+            <input type="text" class = "search" placeholder = "Search table...">
+          </div>
+            <table class="searchable sortable">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Incident Type</th>
+                    <th>Reporting Area</th>
+                    <th>Street Address</th>
+                </tr>
+                </thead>
+            </table>
 
         </section>
       </main>
@@ -48,7 +60,9 @@
               //elements I want for the chart
               sector: m.pgpd_sector,
               date: m.date,
-              inc_type:m.clearance_code_inc_type
+              inc_type:m.clearance_code_inc_type,
+              area: m.pgpd_reporting_area,
+              address: m.street_address
             }));
             console.log(refined);
             return refined;
