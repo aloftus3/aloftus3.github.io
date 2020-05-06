@@ -149,6 +149,35 @@ aside img {
 footer {
   margin-top: 10px;
 }
-table{
-  display:table;
+#searchable{
+  border-collapse: collapse;
+  border: 1px solid #dfdfdf;
+  font-size: 90%;
+  height: 500px;
+  overflow-y:scroll;
 }
+#searchable{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#searchable td, #searchable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#searchable tr:nth-child(even){background-color: #f2f2f2;}
+
+#searchable tr:hover {background-color: #ddd;}
+
+#searchable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.searchable-header{
+  padding: 2px;
+}
+

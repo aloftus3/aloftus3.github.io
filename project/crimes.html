@@ -28,11 +28,14 @@
       <main>
         <section>
           <h2>CRIMES</h2>
-          <p>Here is a list of all crimes since 2017:</p>
+          <p>Here is a list of all crimes in 2020:</p>
           <div class='searchable-header'>
-            <input type="text" class = "search" placeholder = "Search table...">
+            <input type="text" id="myInput" onkeyup="myFunction()" class = "search" placeholder = "Search table by type...">
           </div>
-            <table class="searchable sortable">
+          <div class='searchable-header'>
+            <input type="text" id="myInput1" onkeyup="myFunction1()" class = "search1" placeholder = "Search table by street...">
+          </div>
+            <table class="sortable searchable", id="searchable">
                 <thead>
                 <tr>
                     <th>Date</th>
@@ -41,6 +44,7 @@
                     <th>Street Address</th>
                 </tr>
                 </thead>
+                
             </table>
 
         </section>
@@ -69,32 +73,73 @@
       
           })
           .then((data)=>{
-            const sectorB = [];
+            const sectorB2020 = [];
             //foreach to reformat into array 
             data.forEach(element => {
-              if(element.sector == 'B'){
-                sectorB.push(element);
+              if(element.sector == 'B' & element.date.substring(0,4)=="2020"){
+                sectorB2020.push(element);
               };
             });
-            console.log(sectorB);
-            return sectorB;
+            console.log(sectorB2020);
+            return sectorB2020;
           })
           .then((data)=>{
             const recent = []
-            for (let e of [0,1,2,3,4,5,6,7,8,9]){
-              //console.log(data[data.length-e]);
-              const len = data.length -1;
-              recent.push(data[len-e]);
-            }
+            for (let i = data.length - 1; i >=0 ; i--) {
+                recent.push(data[i]);//outputs 5,4,3,2,1 
+            };
             
-            const new_content = document.querySelector(".crimeData");
+            const new_content = document.querySelector("#searchable");
+            new_content.innerHTML += '<tbody>';
             recent.forEach(el => {
-              console.log(el.date);
-              new_content.innerHTML += '<li>'+el.inc_type+" "+el.date.substring(0,10)+'</li>';
+              new_content.innerHTML += '<tr><td>'+el.date.substring(0,10)+'</td><td>'+el.inc_type+'</td><td>'+el.area+'</td><td>'+el.address+'</td></tr>';
             })
+            new_content.innerHTML += '</tbody>';
             console.log(recent.length)
           });
-          
+        // searchable function
+        function myFunction() {
+        // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("searchable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }
+            }
+        }
+        function myFunction1() {
+        // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput1");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("searchable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }
+            }
+        }
           
       </script>
   </body>
