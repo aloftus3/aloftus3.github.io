@@ -28,7 +28,7 @@
       <main>
         <section>
           <h2>Crime Types</h2>
-          <p>Select one of the most common crimes to...</p>
+          <p>Select a crime type to see all instances in 2020:</p>
           <div class="crimeData"></div>
         </section>
       </main>
@@ -67,7 +67,7 @@
           const new_content = document.querySelector(".crimeData");
           for (let type in data){
             console.log(type);
-            let typeLink = '<li><a href="crimeType.html">'+type+'</a></li>';
+            let typeLink = '<li><a href="crimeType.html?type='+type+'">'+type+'</a></li>';
             new_content.innerHTML += typeLink;
           }
         });
